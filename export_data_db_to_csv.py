@@ -4,9 +4,11 @@ import csv
 import time
 import sys
 
-deptnos=sys.argv[1]
+dates=sys.argv[1]
+dptno=sys.argv[2]
+print(dates)
 
-SQL=''' select * from emp_read where deptno=:deptno '''
+SQL='''select * from sbxtreme.emp_read where hiredate=to_date(:d,'YYYYMMDD') and deptno=:dno'''
 
 #timestamp
 timestr = time.strftime("%d%m%Y")
@@ -23,7 +25,7 @@ output=csv.writer(FILE, dialect='excel')
 #connection with Oracle DB
 connection= cx_Oracle.connect("sbxtreme", "sbxtreme","localhost/xe")
 cursor = connection.cursor()
-cursor.execute(SQL,deptno=deptnos)
+cursor.execute(SQL,{"d":dates,"dno":dptno})
 columns = [i[0] for i in cursor.description]
 output.writerow(columns)
 
