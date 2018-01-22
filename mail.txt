@@ -1,0 +1,15 @@
+Hi Team,
+
+As you guys are aware that Python is the Fastest Growing Programming Language for application development,backend scripting,data science and machine learning and in every application we interact with database to perform various operations on data so, thought of sharing a documentation created by me to interact with database within python scripting using a library called cx_Oracle.
+
+It is a Python extension module that enables access to Oracle Database and is licensed under a BSD license.
+
+Attached documentation consists of working code with explaination which you guys can easily follow to understand the functionality.
+
+Pls let me know in case of any questions.
+
+Happy learning!
+
+Regards,
+Shobhit
+
