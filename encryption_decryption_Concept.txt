@@ -1,0 +1,17 @@
+Cryptograpy is the process of converting plain text ( readable text ) into ciphertext ( unreadable text )
+as well as reverse.
+
+In order to encrypt and decrypt the files one of the best encryption standard is AES. It stands for Advanced Encryption Standard.
+
+1)It is symmetric cipher means the sender and reciever use the same key to encrypt or decrypt the text.
+
+2)Consists of 16 byte block size meaning each part of encrypted data is stored as 16 byte block each.
+
+3) AES can handle 3 key length:
+>> 128 bits long
+>> 192 bits long
+>> 256 bits long
+
+4) While generating randomize ciphertext we use IV which is initialization vector producing distinct ciphertext.
+
+5) For cipher text to be generated from plain text a key is required. To produce the same key for sender and reciever , we HASH the password which produces 16 byte output which is basically the key for encryption and decyption.
