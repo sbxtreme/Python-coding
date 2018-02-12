@@ -1,0 +1,15 @@
+{
+	"name": "Shobhit",
+	"age": 26,
+	"geek":true,
+	"alcoholic":false,
+	"otherdetails":null,
+	"address": {
+		"street": "MGROAD",
+		"city": "Gurgaon",
+		"state": "Haryana",
+		"pin": 122001
+	},
+	"organization": "ITC",
+	"technology": ["Mongodb", "Machine Learning", "Python", "SQL", "Informatica", "UNIX"]
+}
