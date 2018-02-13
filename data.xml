@@ -1,0 +1,21 @@
+<filmlMsg>
+    <notificationHeader>
+        <messageId>090900909084242</messageId>
+        <creationTimeStamp>2015-07-12T11:34:23</creationTimeStamp>
+        <sentBy>FIL-EOD</sentBy>
+    </notificationHeader>
+    <body>
+        <filAckNack>
+            <businessEntity>EOD</businessEntity>
+            <sourceId>ISF009</sourceId>
+            <status>ACK</status>
+            <message>
+                <Message>
+                    <severity>SUCCESS</severity>
+                    <messageId>090900909084242</messageId>
+                    <messageText>CUTOFF</messageText>
+                </Message>
+            </message>
+        </filAckNack>
+    </body>
+</filmlMsg>
