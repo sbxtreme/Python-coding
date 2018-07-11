@@ -1,0 +1,25 @@
+1) install virtual env library
+2) create a django folder 
+3) go in the folder and create virtualenv as virtualenv .
+4) activate using source /bin/activate
+5) install django
+6) go to bin and start project using django-admin.py startproject <projectname>
+7) python manage.py runserver to run server and you'll get the url http://127.0.0.1:8000/
+8) by default the port allocated would be 8000 but we can change the port as
+python manage.py runserver <portnumber> ex: python manage.py runserver 6466
+http://127.0.0.1:6464/ (localhost:port)
+9) to resolve migrate issue while running manage.py runserver do this -- manage.py migrate
+10) to create superuser do this -- manage.py createsuperuser and enter your credentials.
+11) to go to admin page use localhost:port/admin ex: http://127.0.0.1:6464/admin and we can login
+12) All the functionalities for creating , authenticating users etc are already present in setting.py under installed apps
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+13) Urls of page are designed using urls.py
+
+
