@@ -21,5 +21,23 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 13) Urls of page are designed using urls.py
+----------------------------------------------
+
+14) to create app run python manage.py startapp <name of app>
+15) once done a folder with app name will be created and inside it are the imp. files like models,views etc for building apps.
+16) Models.py is the script in which we'll write code to map our data into database
+17) Tests are for writing automated test cases for django apps.
+18) The complete django app is based on MVC ( model view controller )
+19) Below code for models.py which is written for new app.
+class Posts (models.Model):
+    title=models.CharField(max_length=50)
+    content=model.TextField()
+    update_time=model.DateTimeField(auto_now=True,auto_now_add=False)
+    insert_time=model.DateTimeField(auto_now=False,auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+ 
+20) once changes are done in models.py run the command -- python manage.py
 
 
