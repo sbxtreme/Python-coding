@@ -13,3 +13,22 @@
 	"organization": "ITC",
 	"technology": ["Mongodb", "Machine Learning", "Python", "SQL", "Informatica", "UNIX"]
 }
+
+
+Python code for getting swap leg
+import pandas as pd
+pd.options.mode.chained_assignment = None 
+df_orig=pd.read_csv('file.txt',sep='|',encoding='utf-8',names=['accnum','sec_name','ind','code'])
+df_ccs=df_orig[df_orig.sec_name.str.startswith('CCS ')]
+df_non_ccs=df_orig[~df_orig.sec_name.str.startswith('CCS ')]
+df_ccs['col1']=(df_ccs['sec_name'].str.split('/',n=1,expand=True)[1])
+df_ccs['col2']=(df_ccs['col1'].str.split('/',n=1,expand=True)[1])
+df_ccs=df_ccs.sort_values('col1')
+
+def short_long(col):
+	if col=="LONG":
+		return '+1'
+	else:
+		return '-1'
+
+df_ccs['ind'] = df_ccs.apply(lambda col: short_long(col['col2']), axis=1)
