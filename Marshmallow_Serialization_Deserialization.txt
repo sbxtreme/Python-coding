@@ -1,0 +1,79 @@
+Marshmallow is an ORM/ODM/framework-agnostic library for converting complex datatypes, such as objects, to and from native Python datatypes.
+
+This is mostly used while working with APIs. We cannot return python complex data objects like objects while getting a get request from API , instead we need to return a simple data object in json format.
+
+'''The below program is used to serialize the data object i.e
+converting class dataobject into simple python object like json'''
+
+from marshmallow import Schema,fields
+class Person(object):
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+        
+    def __repr__(self):
+        return '{} is {} years old'.format(self.name,self.age)
+
+class PersonSchema(Schema):
+    name=fields.String()
+    age=fields.Integer()
+
+input_dict={}    
+input_dict["name"]=input('What is your name:')
+input_dict["age"]=input('What is your age:')
+
+person=Person(input_dict["name"],input_dict["age"])
+print('Before serialization:',person)
+
+
+''' here we are serializing object i.e converting from python
+    complex object to simple object '''
+
+schema=PersonSchema()
+result=schema.dump(person) # here dump is used to serialize
+
+print('After serialization:',result.data)
+
+o/p:
+----
+What is your name:shobhit
+What is your age:27
+Before serialization: shobhit is 27 years old
+After serialization: {'name': 'shobhit', 'age': 27}
+
+
+'''The below program is used to deserialize the data object i.e
+converting simple dataobject into complex object like object of class'''
+
+from marshmallow import Schema,fields,post_load
+class Person(object):
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+        
+    def __repr__(self):
+        return '{} is {} years old'.format(self.name,self.age)
+
+# inherit Schema class from marshmallow to PersonSchema class
+class PersonSchema(Schema):
+    name=fields.String()
+    age=fields.Integer()
+    
+    # the below piece of code is used to create the input data into object of Person class
+    @post_load
+    def create_person_class_object(self,data):
+        return Person(**data)
+
+input_dict={}    
+input_dict["name"]=input('What is your name:')
+input_dict["age"]=input('What is your age:')
+
+schema=PersonSchema()
+result=schema.load(input_dict)
+print(result.data)
+
+o/p:
+----
+What is your name:shobhit
+What is your age:16
+shobhit is 16 years old
