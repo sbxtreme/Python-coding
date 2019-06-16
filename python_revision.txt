@@ -1,0 +1,712 @@
+serialization and deserialization using pickle
+************************************************
+
+data ={"name":"shobhit","age":28,"phno":[9958766250,9962058544]}
+
+import pprint as p
+
+p.pprint(data)
+{'age': 28, 'name': 'shobhit', 'phno': [9958766250, 9962058544]}
+
+import pickle
+
+with open("data.pkl","wb") as f:
+    pickle.dump(data,f)
+
+f
+Out[17]: <_io.BufferedWriter name='data.pkl'>
+
+del data
+
+with open("data.pkl","rb") as f:
+    data=pickle.load(f)
+    
+
+data
+Out[20]: {'name': 'shobhit', 'age': 28, 'phno': [9958766250, 9962058544]}
+
+shallow copy and deep copy 
+*****************************
+import copy as c
+l=[1,2,3,4]
+l1=c.copy(l) 
+'''shallow copy because both are pointing to same memory location
+   if something is changed by l1 it will be changed in l and
+   vice versa as the address location in memory is same and both are pointing to same address'''
+id(l) and id(l1) are same as both are stored in same location in memory
+
+l1=c.deepcopy(l)
+'''
+in deep copy both the elements are stored @ different addresses in memory and hence no link between both the element
+if any thing is changed by l1 it will not change l and vice versa.
+'''
+id(l) and id(l1) are not same as both are stored at different address
+
+memory management in python
+******************************
+everything in python is an object. There are two types of memory division used by python.
+heap memory 
+stack memory
+The objects are created is in heap memory (like x=5 here 5 is in heap memory) and function execution is in stack memory.
+
+
+python compiled or interpreted
+*******************************
+Python is both compiled and interpreted language.
+in case of programming language like C and C++ they are compiled language i.e when a develop writes a code it is written 
+in high level langauge and then compiler compiles and converts the High level language in machine language.
+in case of python below flow is used:
+
+python code(.py file or in repl)-->compiled code by compiler-->Byte code-->interpreted by PVM-->machine language
+the reason for converting the code into bytecode is to achieve platform independence i.e we can run code on any machine 
+with any CPU architecture design or structure.
+
+there are various implementations of python i.e python language when executed and perform tasks it internally executed in other language.
+1)cpython -- executes in c language.
+2)jython -- executed in java
+3)ironpython -- executed in .net
+4)pypy
+
+global variable and local variable
+***********************************
+a=10 -- (1)
+def functions():
+    global a # global keyword is used to change the value of global variable (1) from inside a function 
+    a=15
+    print('in function:',a)
+
+functions()
+print('outside function:',a)
+
+output:
+--------    
+in function: 15
+outside function: 15
+
+x=10
+
+def changeval():
+    x=20
+    globals()['x']=11 # changed global variable value
+    print('local val',x)
+    print('global val',globals()['x'])
+
+
+changeval()
+
+print('outside func',x)
+
+Here globals()['x'] gives the value of global variable inside function and we can change the global variable value
+from inside the function keeping local variable value same.
+
+multithreading and multiprocessing
+***********************************
+'''
+here to create 2 different thread we passed Tread module in class arguments.
+classes are now inheriting the functionality of Thread class which is present
+in threading module imported on top.
+Also we have to start both the treads to split the main thread into subtreads
+and run simultaniously.
+'''
+from threading import *
+import time
+class hello(Thread):
+    def __init__(self):
+        self.msg='hello'
+        
+    def run(self):
+        for i in range(5):
+            print(self.msg)
+            
+class hi(Thread):
+    def __init__(self):
+        self.msg='hi'
+        
+    def run(self):
+        for i in range(5):
+            print(self.msg)
+            
+t1=hello()
+t2=hi()
+
+
+# creating thread
+th1=Thread(target=t1.run())
+th2=Thread(target=t2.run())
+
+# starting thread
+th1.start()
+th2.start()
+
+# joining subtread to main thread
+th1.join()
+th2.join()
+
+The syntax is same for multiprocessing , we use the below 
+from multiprocessing import process
+
+p1=process(target=t1.run())
+p2=process(target=t2.run())
+p1.start()
+p2.start()
+
+p1.join()
+p2.join()
+
+Also in multiprocessing there is a concept of lock ie. lock.aquire() and lock.release()
+this is used on the shared data between 2 process. Once process 1 completes its manupulation on 
+shared data then process 2 can manipulate the shared data.
+
+functional programming:
+***********************
+lamba expressions are ananamous functions with no name. op=lambda x,y,z: print('3x+2y+3z is :',3*x+2*y+3*z)
+
+Map function:
+--------------
+temp=[('satna',30),('bhopal',20),('delhi',15),('ggn',50)]
+
+print(temp)
+c_to_f=lambda data: (data[0],(9/5)*data[1]+32)
+
+# map function
+print(list(map(c_to_f,temp)))
+
+''' 
+the map function is used to pass the function with the data in a single line
+this function is usesful when we want to apply the function on the list of 
+values. Instead of iterating for each value and apply the logic
+we can use map function.
+'''
+
+filter function:
+----------------
+l=[1,2,4,5,20,23,39]
+
+# use filter function to get data > 10
+
+print(list(filter(lambda x:x>10,l)))
+
+''' filter function is used to filter out data. In this function
+we pass 2 arguments ; 1st is the filter logic and second is the data.
+The filter function works on each element of data. Instead of iterating 
+through the elements and apply filter on each the filter function 
+applies filter logic on all elements'''
+
+l=[1,2,'',4,'',6]
+
+print(list(filter(None,l)))
+
+enumerate function to get position and data:
+----------------------------------------------
+l=[1,2,4,5,20,23,39]
+
+for pos,data in enumerate(l):
+    print('position is {} and data is {}'.format(pos,data))
+
+
+
+
+decorators ,firstclass function and closer function:
+****************************************************
+Using decorators we can add extra features in the existing functions without changing the code of existing function.
+It is a function which takes another function as an argument and returns another function.
+
+# Decorator function will reverse numerator and denominator if numerator < denominator
+def div(a,b):
+    print(a/b)
+
+# here div is passed to decorator function so it is called as first class function    
+    
+def decoratorfunc(func):
+    def innerfunc(a,b):
+        if a<b:
+            a,b=b,a
+        return(func(a,b))
+    return innerfunc
+
+
+# calling decorator function way 1
+decoratorfunc(div)(2,4)
+    
+# calling decorator function way 2
+div=decoratorfunc(div)
+div(2,4)
+
+############## closer function ############
+def number(a,b):
+    def mult(c):
+        return((a+b)*c)
+    return mult
+
+a=number(2,3)(4)
+print(a)
+
+# here number is called the closer function
+
+
+iterators
+*********
+print('program 1 ....')
+# a simple iterator ; a loop internally calls the next function of iterator
+a=[1,5,6,99]
+
+it=iter(a)
+print(it.__next__())
+print(it.__next__())
+print(it.__next__())
+print(it.__next__())
+
+print('program 2 ....')
+class TopTen:
+    def __init__(self):
+        self.num=1
+    
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.num<=10:
+            val=self.num
+            self.num+=1
+            return val
+        else:
+            raise StopIteration
+            
+
+t1=TopTen()
+
+for i in t1:
+    print(i)
+
+generators:
+***********
+Generators are used in python to return iterators.
+we use yield keyword to get iterators from generators.
+The advantage of using generators over iterators is that we don't need to create class and 
+write our own __iter__() and __next__() method instead we just have to use yield keyword 
+instead of return. Also if we use simple loop to get records let say from database then the complete
+data will be in the memory where as the generators and iterators get the data one by one and load 
+into the memory which saves the memory.
+Every generator is an iterator but not every iterator is a generator.
+
+print('Program 1 ....')
+def topten():
+    yield 1
+    yield 2
+    yield 4
+
+values=topten()
+print(values.__next__())
+print(values.__next__())
+print(values.__next__())
+
+
+print('Program 2 ....')
+def topten():
+    n=1
+    while n<=10:
+        yield n
+        n+=1
+        
+        
+it=topten()
+
+for i in it: # here for loop will apply __next__() function in the iterator created by generator 
+    print(i)
+
+special methods (dunder methods):
+*********************************
+class Employee:
+    def __init__(self,firstname,lastname):
+        self.firstname=firstname
+        self.lastname=lastname
+        
+    def fullname(self):
+        return self.firstname+' '+self.lastname
+
+    def __str__(self):
+        return self.firstname+self.lastname
+
+    def __repr__(self):
+        return self.firstname+ '-' +self.lastname
+
+
+e1=Employee('shobhit','bhatnagar')
+
+print(e1)
+
+#print(e1.__repr__())
+#print(e1.__str__())
+
+Here __<method>__ is called dunder method. Above is the class using dunders. Also while printing e1
+is calling __repr__ by default but if __ str__ is present then the preference will be given to __str__
+
+OOPs:
+*****
+1)In OOPs when we define classes and objects using the below 
+class Computer:
+    pass
+    
+c1=Computer()
+Here c1 is object of class Computer and Computer() is constructor of class which calls the __init__() method
+and allocate the space to object c1 in the memory based on the variable bind with an object
+
+c1=Computer(var1,var2,var3) will be allocated more space than c1=Computer()
+
+2) The variables which are defined in the __init__() are called instance variable and the variables
+which are defined in the class outside the __init() are called class variables.
+
+class car:
+    wheels=4
+    def __init__(self):
+        self.name='BMW'
+        self.mil=8
+        
+
+c1=car()
+# changing the class variables
+car.wheels=5 # changing the class variables 
+print(c1.name,c1.mil,c1.wheels)
+''' output
+BMW 8 5
+'''
+
+
+3) Types of methods in class:
+    a) instance method
+    b) class method
+    c) static method
+    
+    Below is an example of all the 3 types of methods:
+    
+    class student:
+        school='Python Labs'
+        # the below method is a instance method which takes self as an argument
+        def __init__(self,m1,m2,m3):
+            self.m1=m1
+            self.m2=m2
+            self.m3=m3
+    
+        def avg(self):
+            return ((self.m1+self.m2+self.m3)/3)
+        # the below method is a class method which takes cls as an argument
+        @classmethod
+        def getschoolname(cls):
+            return cls.school
+        
+        # the below method is a static method which is independent, it takes neither class name nor object name
+        @staticmethod
+        def info():
+            print('This school teaches python')
+        
+    
+    s1=student(100,90,80)
+    
+    print(s1.avg()) # this is calling instance method
+    
+    print(student.getschoolname()) # this is a class method
+    
+    print(student.info()) # this is a static method which does not takes class or obj as an argument
+    
+
+4) Getter and setter methods and @property decorators
+    Getter and setter methods are the 2 types of instance methods which can be used in a class
+    to get the value of object variable and to set the value of object variable.
+    
+        class car:
+        def __init__(self,speed):
+            self.speed=speed
+            
+        def get_speed(self):
+            return(self.speed)
+            
+        def set_speed(self,newspeed):
+            print('Old speed was:',self.speed)
+            self.speed=newspeed
+            print('new speed set:',self.speed)
+    
+    c1=car(100)
+    
+    print(c1.get_speed())
+    
+    print(c1.set_speed(120))
+
+5) Inner classes 
+    Class inside a class is called as inner class. Below is an example:
+    
+    class student:
+        def __init__(self,name,rollno):
+            self.name=name
+            self.rollno=rollno
+            self.lap=self.laptop() # object of class laptop is lap
+            
+        def show(self):
+            print(self.name,self.rollno)
+            (self.lap.show()) # object of class laptop lap calls show() of laptop in show() of student
+            
+            
+        class laptop:
+            def __init__(self,lapname='HP',processor='i7'):
+                self.lapname=lapname
+                self.processor=processor
+            
+            def show(self):
+                print(self.lapname,self.processor)
+                
+    
+    s1=student('shobhit','583853')
+    
+    s1.show()
+    
+    o/p:
+    ----
+    shobhit 583853
+    HP i7
+
+6) Inheritance are of 3 types:
+    1) Single level inheritance 
+    2) Multilevel inheritance
+    3) Multiple Inheritance
+    
+    Below is an example:
+    
+    class A:
+        def feature1(self):
+            print('feature 1')
+            
+    class B(A):
+        def feature2(self):
+            print('feature 2')
+            
+    class C(B):
+        def feature3(self):
+            print('feature 3')
+            
+    
+    class D(C):
+        def feature4(self):
+            print('feature 4')
+    
+    class ABC:
+        def featureabc(self):
+            print('feature xyz')
+            
+    class TEST:
+        def featuretest(self):
+            print('feature test')
+    
+    class XYZ(ABC,TEST):
+        def featurexyz(self):
+            print('feature xyz')        
+            
+    # single level
+    print('single level inheritance\n')
+    b1=B()
+    b1.feature1() # object of B class can access function of class A
+    b1.feature2()
+    
+    # multilevel example1
+    print('\nmultilevel level inheritance -- example1\n')
+    c1=C()
+    c1.feature1() # object of C class can access function of class A        
+    c1.feature2() # object of C class can access function of class B
+    c1.feature3()
+    
+    # multilevel example 2
+    print('\nmultilevel level inheritance -- example2\n')
+    d1=D()
+    d1.feature1() # object of D class can access function of class A - inherited directly        
+    d1.feature2() # object of C class can access function of class B - inherited indirectly as C inherits B       
+    d1.feature3() # object of D class can access function of class C - inherited directly       
+    d1.feature4()
+    
+    # multiple
+    print('\nmultiple inheritance\n')
+    obj=XYZ()
+    obj.featureabc()
+    obj.featuretest()
+    obj.featurexyz()
+    
+    output:
+    -------
+    single level inheritance
+    
+    feature 1
+    feature 2
+    
+    multilevel level inheritance -- example1
+    
+    feature 1
+    feature 2
+    feature 3
+    
+    multilevel level inheritance -- example2
+    
+    feature 1
+    feature 2
+    feature 3
+    feature 4
+    
+    multiple inheritance
+    
+    feature xyz
+    feature test
+    feature xyz
+    
+7) Init , super and MRO in classes
+
+    Example : In the below example we have two classes and B inherits A. If init method is not present in B
+    class so the object of B will call init of A and if B class has its init then the object will call init of B.
+    
+    class A:
+        def __init__(self):
+            print('Init of class A')
+        def featureA(self):
+            print('feature of class A')
+            
+            
+    class B(A):
+        def __init__(self):
+            print('Init of class B')
+        def featureB(self):
+            print('feature of class B')
+            
+    b1=B()
+    b1
+    
+    output:
+    ------
+    Init of class B
+    
+    and if the below code is :
+    
+    class A:
+        def __init__(self):
+            print('Init of class A')
+        def featureA(self):
+            print('feature of class A')
+            
+            
+    class B(A):
+        '''def __init__(self):
+            print('Init of class B')'''
+        def featureB(self):
+            print('feature of class B')
+            
+    b1=B()
+    b1
+
+    output:
+    ------
+    Init of class A
+    
+    If we want to call method of class A into Class B and B inherits A then we use super keyword.
+    Below is an example
+    
+    
+    class A:
+        def __init__(self):
+            print('Init of class A')
+        def featureA(self):
+            print('feature of class A')
+            
+            
+    class B(A):
+        def __init__(self):
+            print('Init of class B')
+        
+        def featureB(self):
+            super().__init__()  # here we are calling __init of A inside featureB function
+            print('feature of class B')
+            
+    b1=B()
+    b1.featureB()
+    
+    output:
+    -------
+    Init of class B
+    Init of class A
+    feature of class B
+    
+    MRO - method resolution order is a concept in multiple and multilevel inheritance in which 
+    if we have 2 common methods say func() in both the super classes A and B from which a subclass C
+    is inheriting the features then a subclass C when use super().func() , MRO will check func() in left class i.e A
+    and execute the function func(). MRO checks from Left to right or Top to Bottom.
+    
+    class A:
+        def __init__(self):
+            print('class A init')
+            
+    class B:
+        def __init__(self):
+            print('class B init')
+    
+    class C(A,B):
+        def noinit(self):
+            super().__init__()
+            print('No init')
+            
+            
+    c1=C()
+    c1
+    
+    output:
+    -------
+    class A init
+
+8) Polymorphism:
+There are 4 types of polymorphism. They are:
+a) Duck typing
+b) Operator overloading
+c) Method overloading
+d) Method overriding
+
+a) Duck typing: If a bird moves like duck,swim like duck,fly like duck then its a duck. Below is an example:
+    class duck:
+        def features(self):
+            print('Quacks')
+            print('Swims')
+            print('i am a real duck')
+            
+    class parrot:
+        def features(self):
+            print('Quacks')
+            print('Swims')
+            print('i am a not a real duck')
+            
+    
+    class whoisduck:
+        def ducklikebird(self,bird):
+            bird.features() 
+            
+    d1=duck()
+    p1=parrot()
+    
+    w1=whoisduck()
+    
+    
+    print('executing feature function of parrot class')
+    w1.ducklikebird(p1)
+    print('\nexecuting feature function of duck class')
+    w1.ducklikebird(d1)
+    
+    ''' In the above example we can see that both the classes have features function
+    and in class whoisduck we are using bird.features()
+    now it does not matter which class (duck or parrot) function 'features' is passed 
+    in whoisduck class but this shows that we can change the function which is executing in whoisduck
+    provided BOTH THE FUNCTION NAME (from duck and parrot class)  MUST BE SAME. This is a type of
+    polymorphism which is called as ducktyping'''
+    
+    output
+    -------
+    executing feature function of parrot class
+    Quacks
+    Swims
+    i am a not a real duck
+    
+    executing feature function of duck class
+    Quacks
+    Swims
+    i am a real duck
+        
+
