@@ -655,58 +655,481 @@ BMW 8 5
     class A init
 
 8) Polymorphism:
-There are 4 types of polymorphism. They are:
-a) Duck typing
-b) Operator overloading
-c) Method overloading
-d) Method overriding
+    There are 4 types of polymorphism. They are:
+    a) Duck typing
+    b) Operator overloading
+    c) Method overloading
+    d) Method overriding
+    
+    a) Duck typing: If a bird moves like duck,swim like duck,fly like duck then its a duck. Below is an example:
+        class duck:
+            def features(self):
+                print('Quacks')
+                print('Swims')
+                print('i am a real duck')
+                
+        class parrot:
+            def features(self):
+                print('Quacks')
+                print('Swims')
+                print('i am a not a real duck')
+                
+        
+        class whoisduck:
+            def ducklikebird(self,bird):
+                bird.features() 
+                
+        d1=duck()
+        p1=parrot()
+        
+        w1=whoisduck()
+        
+        
+        print('executing feature function of parrot class')
+        w1.ducklikebird(p1)
+        print('\nexecuting feature function of duck class')
+        w1.ducklikebird(d1)
+        
+        ''' In the above example we can see that both the classes have features function
+        and in class whoisduck we are using bird.features()
+        now it does not matter which class (duck or parrot) function 'features' is passed 
+        in whoisduck class but this shows that we can change the function which is executing in whoisduck
+        provided BOTH THE FUNCTION NAME (from duck and parrot class)  MUST BE SAME. This is a type of
+        polymorphism which is called as ducktyping'''
+        
+        output
+        -------
+        executing feature function of parrot class
+        Quacks
+        Swims
+        i am a not a real duck
+        
+        executing feature function of duck class
+        Quacks
+        Swims
+        i am a real duck
+        
+    b) Operator operloading:
+            class Student:
+            def __init__(self,m1,m2):
+                self.m1=m1
+                self.m2=m2
+                
+            # here we have used dunder method or magic method add and done operator overloading
+            def __add__(obj1,obj2):
+                marks1=obj1.m1+obj2.m1
+                marks2=obj1.m2+obj2.m2
+                s3=Student(marks1,marks2)
+                return s3
+            # here we have used dunder method or magic method greater than and done operator overloading
+            def __gt__(obj1,obj2):
+                marks1=obj1.m1+obj1.m2
+                marks2=obj2.m1+obj2.m2
+                if marks1>marks2:
+                    return True
+                else:
+                    return False
+                
+        
+        s1=Student(10,20)
+        s2=Student(50,60)
+        
+        s3=s1+s2 # here + is not supported for objects but we have done operator overloading
+        print(s3.m1)
+        print(s3.m2)
+        
+        if s1>s2: # here > is not supported for objects but we have done operator overloading
+            print('Object s1 has greater values')
+        else:
+            print('Object s2 has greater values')
+            
+        NOTE: When ever we print the object like 
+        
+        a=10
+        print(a)
+        
+        or 
+        
+        s1=Student(10,20)
+        print(s1)
+        
+        Internally while printing the object it automatically converts into string i.e
+        __str__() method is applied like print(a.__str__()) or print(s1.__str__())
 
-a) Duck typing: If a bird moves like duck,swim like duck,fly like duck then its a duck. Below is an example:
-    class duck:
-        def features(self):
-            print('Quacks')
-            print('Swims')
-            print('i am a real duck')
             
-    class parrot:
-        def features(self):
-            print('Quacks')
-            print('Swims')
-            print('i am a not a real duck')
-            
+    c) Method overloading:
+       Method overloading is a concept in which if we have 2 or more methods in a class with the same name then
+       it overloads the functionality of methods.
+       
+       ex: method 1-- def sum(a,b), method 2-- def sum(a,b,c) ; here sum method with a,b,c args overloads
+       sum method with a,b args.
+       
+       NOTE: In python method overloading is not possible. We can implement by using some twiks but it is 
+       not implemented in python.
+       
+           class Student:
+                def sum(self,a=0 ,b=0 ,c=0):
+                    s=a+b+c
+                    return s
+                
+           s1=Student()
     
-    class whoisduck:
-        def ducklikebird(self,bird):
-            bird.features() 
-            
-    d1=duck()
-    p1=parrot()
-    
-    w1=whoisduck()
-    
-    
-    print('executing feature function of parrot class')
-    w1.ducklikebird(p1)
-    print('\nexecuting feature function of duck class')
-    w1.ducklikebird(d1)
-    
-    ''' In the above example we can see that both the classes have features function
-    and in class whoisduck we are using bird.features()
-    now it does not matter which class (duck or parrot) function 'features' is passed 
-    in whoisduck class but this shows that we can change the function which is executing in whoisduck
-    provided BOTH THE FUNCTION NAME (from duck and parrot class)  MUST BE SAME. This is a type of
-    polymorphism which is called as ducktyping'''
-    
-    output
-    -------
-    executing feature function of parrot class
-    Quacks
-    Swims
-    i am a not a real duck
-    
-    executing feature function of duck class
-    Quacks
-    Swims
-    i am a real duck
+           print(s1.sum(3,4))  # Here you can see that 2 variables are passed in a sum functions but it is
+           expecting 3 values so to adjust , we have made all the values as 0 by default in sum method.
+           
+           Method overloading is not present in pythob because when we declare a method in a class, we pass 
+           some arguments in a method. In python we don't need to declare the datatype of arguments passed in 
+           a method which basically means that if a method with the same name and same arguments is used for string
+           it can also be used for numbers that's why method overloading is not implemented in python.
+           
+    d) Method overriding:
+        If Two or more classes have methods with the same name and if object of subclass calls the method of subclass
+        then the process will look for the method in subclass, if not present it will call the method of superclass
+        if found then it will call the method of subclass, so here method of subclass overrides the method of
+        super class. This is called as method overriding. Below is an example:
         
 
+            #Example1:
+            
+            class A:
+                def show(self):
+                    print('In Show function of class A')
+                    
+            
+            class B(A):
+                pass
+            
+            
+            b1=B()
+            b1.show()
+                
+            output:
+            -------
+            In Show function of class A
+            
+            #Example2:
+            
+            class A:
+                def show(self):
+                    print('In Show function of class A')
+                    
+            
+            class B(A):
+                def show(self):
+                    print('In Show function of class B')
+            
+            
+            b1=B()
+            b1.show()
+            
+            output:
+            -------
+            In Show function of class B
+            
+ZIP funtion in python
+*********************
+
+'''
+Zip function can be used to zip 2 or more lists into tuples and for 2 lists we can create dictionaries
+'''
+
+l1=[1,2,3,4]
+l2=['a','b','c','d']
+
+
+print((zip(l1,l2))) # this will give object of zip class and to run this function we can convert the output into lists or dict
+
+'''
+output:
+<zip object at 0x00000221FC365E08>
+'''
+
+print(list(zip(l1,l2)))
+
+'''
+output:
+[(1, 'a'), (2, 'b'), (3, 'c'), (4, 'd')]
+'''
+
+print(dict(zip(l1,l2)))
+
+'''
+output:
+{1: 'a', 2: 'b', 3: 'c', 4: 'd'}
+'''
+
+l1,l2=(list(zip(*l))) # this will UNZIP the list into 2 different lists
+
+print(list(l1))
+print(list(l2))
+
+'''
+output:
+[1, 2, 3, 4]
+['a', 'b', 'c', 'd']
+'''
+
+Static and Dynamic type of languages:
+************************************
+Statically typed languages
+A language is statically typed if the type of a variable is known at compile time. For some languages this means that you as the programmer must specify what type each variable is (e.g.: Java, C, C++); other languages offer some form of type inference, the capability of the type system to deduce the type of a variable (e.g.: OCaml, Haskell, Scala, Kotlin)
+
+The main advantage here is that all kinds of checking can be done by the compiler, and therefore a lot of trivial bugs are caught at a very early stage.
+
+Examples: C, C++, Java, Rust, Go, Scala
+
+Dynamically typed languages
+A language is dynamically typed if the type is associated with run-time values, and not named variables/fields/etc. This means that you as a programmer can write a little quicker because you do not have to specify types every time (unless using a statically-typed language with type inference).
+
+Examples: Perl, Ruby, Python, PHP, JavaScript
+
+Most scripting languages have this feature as there is no compiler to do static type-checking anyway, but you may find yourself searching for a bug that is due to the interpreter misinterpreting the type of a variable. Luckily, scripts tend to be small so bugs have not so many places to hide.
+
+Most dynamically typed languages do allow you to provide type information, but do not require it. One language that is currently being developed, Rascal, takes a hybrid approach allowing dynamic typing within functions but enforcing static typing for the function signature.
+
+
+No interfaces in Python:
+************************
+Interfaces are created in other languages like Java because it does not support multiple inheritance where as in python we don't need interfaces because we can implement
+multiple inheritance.Also interfaces are only implemented in static languages where we have datatype defined for a variable but python is a dynamic type of language with 
+no datatype defined and hence multiple inheritance is possible in python, thus no interfaces.
+
+Why tuples are faster than list:
+*********************************
+In python we have two types of objects. 1. Mutable,  2. Immutable. In python lists comes under mutable objects and tuples comes under immutable objects.
+Tuples are stored in a single block of memory. Tuples are immutalbe so, It doesn't require extraspace to store new objects.
+Lists are allocated in two blocks: the fixed one with all the Python object information and a variable sized block for the data.
+It is the reason creating a tuple is faster than List.
+It also explains the slight difference in indexing speed is faster than lists, because in tuples for indexing it follows fewer pointers.
+
+Abstract classes ( ABC classes):
+********************************
+Abstract classes are the classes in python which is a blue print of every functionality which can be 
+implemented in other classes and the object of abstract class cannot be created. Methods in abstract 
+classes are just having signatures but the functionality is implemented in other classes which inherit 
+abstract class. we use @abstractmethod dectorator to define a method as abstract method in an abstract class.
+Abstract class inherits ABC class from abc module in python to get property of abstract classes.
+
+from abc import ABC,abstractmethod
+
+class Animal(ABC):
+    @abstractmethod
+    def move(self):
+        pass
+    
+class Human(Animal):
+    def move(self):
+        print('I am human and i can walk')
+        
+class Snake(Animal):
+    def move(self):
+        print('I am snake and i can crawl')
+        
+
+h1=Human()
+h1.move()
+
+s1=Snake()
+s1.move()
+
+Encapsulation, Public and Private methods/variables
+****************************************************
+Encapsulation is a concept in oops where the class methods and class variables are not allowed to get accessed 
+using object from outside the class. This prevent any modifications in data and methods of a class. Normally 
+the methods and variable which we define in a class are public methods and variables can be accessed using object 
+but we can also define the private methods and variable in a class which cannot be accessed using object. Here we are hiding the functionality of a class which is called as encapsulation.
+
+class Car:
+    __speed=100
+    country='India'
+    print('Public variable:',country)
+    def __init__(self,speed):
+        self.speed=speed
+        
+    def __changeconfig(self):
+        print('buildnumber:10214 modelblueprint:x087478 Tech:electric')
+        
+        
+    def set_speed(self,country):
+        print('original speed:',self.__speed)
+        self.__speed=self.speed
+        print('New speed:',self.__speed)
+        print('Calling private method using public method set_speed')
+        self.__changeconfig()
+        print('Country changed:',country)
+
+    
+    
+        
+
+c1=Car(50)
+c1.set_speed('US')
+c1.__speed=500 # this will not change the private variable
+c1.__changeconfig() # this will give error because private methods cannot be called directly.
+        
+        
+output:
+--------
+Public variable: India
+original speed: 100
+New speed: 50
+Calling private method using public method set_speed
+buildnumber:10214 modelblueprint:x087478 Tech:electric
+Country changed: US
+
+Getter and setter methods are used in python in order to follow data encapsulation principles.
+Getter methods are used to get the values of varibles and functions which are private in class
+and setter methods are used to set the values of private variables using setter methods, we cannot change the
+values of private variables directly using object. Getter and setter methods protect the class variables and methods to be changed.
+
+First class functions:
+************************
+Below are the properties of first class functions:
+-------------------------------------------------
+The functions which can be passes in another function
+The functions which can return other functions
+The functions which can be treated as objects 
+
+# Python program to illustrate functions 
+# can be treated as objects 
+def shout(text): 
+	return text.upper() 
+
+print shout('Hello') 
+
+yell = shout 
+
+print yell('Hello') 
+
+
+# Python program to illustrate functions 
+# can be passed as arguments to other functions 
+def shout(text): 
+	return text.upper() 
+
+def whisper(text): 
+	return text.lower() 
+
+def greet(func): 
+	# storing the function in a variable 
+	greeting = func("Hi, I am created by a function passed as an argument.") 
+	print greeting 
+
+greet(shout) 
+greet(whisper) 
+
+
+# Python program to illustrate functions 
+# Functions can return another function 
+
+def create_adder(x): 
+	def adder(y): 
+		return x+y 
+
+	return adder 
+
+add_15 = create_adder(15) 
+
+print add_15(10) 
+
+
+Higher order functions:
+***********************
+The function which takes argument as a function
+The function which gets returned inside any other function
+
+
+Metaclass:
+**********
+In python everything is an object. Even the classes are also the instance of other class. That class is called as 
+type class or metaclass.
+
+In the below example we have created the object of student class and the object is of type student where as when
+we print type of Student class the output is 'Type'. This means class Student is an instance of Type class.
+
+class Student:
+    pass
+
+s1=Student()
+print(type(s1))
+'''
+output:
+<class '__main__.Student'>'''
+
+print(type(Student))
+'''output
+<class 'type'>'''
+
+so Metaclasseses are used for generation of classes. We can create custom metaclass which will generate the class.
+When ever we create a class we perform the below:
+1) Create object of a class
+2) Instantiate the Object 
+
+The above 2 can be done using metaclass.
+To create our custom metaclass, our custom metaclass have to inherit type metaclass and usually override –
+__new__(): It’s a method which is called before __init__(). It creates the object and return it. We can overide this method to control how the objects are created.
+__init__(): This method just initialize the created object passed as parameter
+
+We can create metaclass using 2 methods:
+1) Using type keyword
+2) Overriding the __new__() and __init__() method of type metaclass.
+
+USING TYPE METHOD:
+-----------------
+
+def test_method(self):
+	print("This is a method which is called in Test class but not of class") 
+
+# creating a base class 
+class Base: 
+	def myfun(self): 
+		print("This is a method of base class")
+
+
+# Creating Test class dynamically using type() method directly 
+Test = type('Test', (Base, ), dict(x="Shobhit", my_method=test_method))
+
+'''
+The above will create a class as shown below:
+
+class Test(Base):
+    x='atul'
+    def my_method(self):
+        return test_method(self)
+
+a= Test()
+a.my_method()
+'''
+
+# Print type of Test 
+print("Type of Test class: ", type(Test)) 
+
+# Creating instance of Test class 
+test_obj = Test() 
+print("Type of test_obj: ", type(test_obj)) 
+
+# calling inherited method 
+test_obj.myfun() 
+
+# calling Test class method 
+test_obj.my_method() 
+
+# printing variable 
+print(test_obj.x)
+
+Difference between python 2.x and 3.x:
+**************************************
+1) In python 2 we use raw_input() but in python 3 we use input(). Raw_input returns an evaluated output
+where as input() returns the output in string. To evaluat we should use eval() in python 3.x.
+
+x=input()
+print('The entered value is :',x)
+print('The evaluated values is:',eval(x))
+
+2) In python 2 print is a statement where as in python 3 print is a function.
+print "hello" -- in python 2
+print("hello") -- in python 3
+
+3) In python 2 we use <> for not equals to where as we use != in python 3 for not equals to.
+
+4) In python 2 we use range which return List of values where as in python 3 we use range which returns range object.
