@@ -1133,3 +1133,269 @@ print("hello") -- in python 3
 3) In python 2 we use <> for not equals to where as we use != in python 3 for not equals to.
 
 4) In python 2 we use range which return List of values where as in python 3 we use range which returns range object.
+
+
+Numpy:
+******
+Numpy is a numerical computation library in python using which we can create multidimensional
+arrays. Also this library is very fast. In normal python code if we run a loop so for performing 
+any operation everytime python checks the type of variable 
+(ex: to add integers it check the variable type and calls interger class method __add__()
+ where as in other static typed languages we already give datatype to a variable which
+skips type checking so they are fast).
+
+Numpy uses less memory
+
+So, numpy is fast because it helps us to perform operations which we perform using looping
+without using numpy.
+
+ex:1
+a=[1,2,4,5,7,8]
+[i+4 for i in a] # here looping is done on every element to add 4 to every element.
+
+import numpy as np
+b=np.array(a)
+b+4  # no looping done using numpy , actually it's pusing down the looping to the compiled code of numpy where type checking is done once.
+
+Arithematical,bitwise,comparision,trignometric and other scientific functions are called as ufuncs
+in numpy
+
+ex2: performing aggrigation on numpy arrays are faster like np.min(),np.max(),np.sum() etc...
+
+ex3: performing fancy indexing in numpy.
+
+l=[1,3,4,5,6]
+in python to find the 2,4,3 index elements of a list we need to write logic to find the values and concat to create a new list,
+this can be done very easily in numpy.
+
+a=np.array(l)
+indx=[2,4,3]
+a[indx]
+
+output:
+--------
+array([5, 8, 7])
+
+ex4: we can use broadcasting multiple arrays in numpy i.e combining multiple arrays of different 
+dimensions where in python it would be very hard.
+
+Below are the commonly used concepts of numpy array:
+----------------------------------------------------
+
+import numpy as np
+
+'''
+a=[1,2,3,4]
+b=[5,5,5.5,9]
+
+x=np.array(a) # this will create numpy array from normal list
+y=np.array(b) # this will create numpy array from normal list
+print(x/y**2)
+
+#print (a*b); -- this will give error because lists cannot do calculations.
+
+print(x+y)  # this will do addition of elements , numpy array
+print(a+b) # this will add element of both the list , simple python lists
+
+print (x[2])
+print (a[2])
+
+print (type (x)) # this will show x is numpy array
+print (type (a)) # this will show a is a list
+
+print (np.shape(x)) # this show the columns and rows of x
+
+# n dimensional arrays
+
+#2 dimensional arrays
+
+array1=(
+        [1,2,3],
+        [4,5,"6"]
+        )
+xx= np.array(array1)
+print (np.array(array1))
+# the above array elements are converted to string as numpy array can only store 1 type of elements
+
+array2 = (
+          [1.2,3,4],
+          [5.2,2.2,8.1]
+         )
+yy = np.array(array2)
+print (np.array(array2))
+#the above array elements are converted to float as numpy array can only store 1 type of elements
+
+print (np.shape (xx)) # (2,3) two rows and each row with 3 elements
+
+#print (array2[0][2])
+#print array2[0,2] # this format for printing is not supported in list , it will throw error
+print (yy[0,2]) # this is supported in numpy array , it will work
+
+
+print ('# calculations')
+
+a = (
+    [1, 2, 3],
+    [4, 5, 6]
+    )
+
+b = ( 
+    [1, 2, 3],
+    [4, 5, 6]
+    )
+
+x = np.array(a)
+y = np.array(b)
+
+print(x * y)
+
+print ((x[:,1])+(y[:,1]))
+print ((x[1,:]) +(y[1,:]))
+
+
+print ('\n\n\n\n')
+
+# random number generation by using Numpy
+
+
+random1= np.random.rand(5)
+random2 = np.random.rand(5,1)
+'''
+
+
+a = [1,3,4]
+size = sys.getsizeof(a)*len(a)
+print (size)
+
+na = np.array(a)
+print (na)
+print (type(na))
+print (na.size)
+print (na.itemsize)
+nsize = na.size*na.itemsize
+print (nsize)
+
+na1 = np.random.rand(3,2)
+print (na1)
+print (na1.shape)
+print(na1.ndim)
+print (na1.dtype)
+
+print(na1.size)
+print(na1.itemsize)
+
+x= [[1,2,3],
+    [4,5,6]]
+
+xx = np.array(x)
+print (xx)
+print (x)
+
+xxy = xx.reshape(3,2)
+print (xxy)
+
+
+random_var= np.random.rand(3,4)
+print (random_var)
+re_random_var = random_var.reshape(4,3)
+print (re_random_var)
+
+####################################
+#slicing
+na = np.array(
+                [
+                    [1,2,3]
+                    ,[4,5,6]
+                    ,[6,7,8]
+                ]
+             )
+print (na)
+print ('\n')
+print (na[0:2,1])
+
+# linespace
+m = np.linspace(1,3,5)
+print (m)
+
+
+# min,max,sum,sum_axis,sqrt,mean,standard_derviation
+
+print(m.min())
+print(m.max())
+print(m.sum())
+
+print (na,'\n')
+print (na.sum(axis = 0))
+print (na.sum(axis =1))
+
+print (np.sqrt(na))
+print (np.mean(na))
+print (np.std(na))
+
+# vstack, hstack , revel
+''' revel is converting nd numpy array into 1d array '''
+
+nb=na
+print (na,'\n')
+print (nb,'\n')
+
+print ('vstack:\n',np.vstack((na,nb)))
+print ('hstack:\n',np.hstack((na,nb)))
+print ('Ravel:\n',np.ravel(na))
+
+# Mathematical func
+
+print(np.sin(na))
+x =90
+print (np.sin(x)) # value in degree
+print (np.sin(np.deg2rad(x))) # value in radian
+
+print (np.cos(0))
+print (np.cos(np.deg2rad(0)))
+
+print (np.tan(45))
+print (np.tan(np.deg2rad(45)))
+
+print (np.pi)
+
+print (np.log10(na))
+print (np.log(na))
+
+print (np.exp(na))
+
+
+## creating array using dtype
+a = [1,2,3]
+
+print ( np.array(a,dtype=np.float32))
+print (np.array(a,dtype= np.complex_))
+print (np.array(a,dtype= np.bool_))
+print (np.array(a,dtype= np.str_))
+
+# zeros array:
+z = np.zeros([4])
+print (z)
+
+z[1]=10
+z[2]=-8
+print (z)
+
+# creating array from other array with different datatype
+a = np.arange(0,12,2)
+print (a)
+a1 = np.array(a,dtype = np.complex_)
+print (a1)
+
+
+a1 = np.array([[1, 2, -4], [3, -1, 5]])
+a2 = np.array([[6, -3], [1, -2]])
+
+# if equation is
+# x+2y =1
+# 2x -y =2
+#find x and y
+
+coff = np.array([[1,2],[2,-1]])
+cons = np.array([1,2])
+sol = np.linalg.solve(coff,cons)
+print (sol)
