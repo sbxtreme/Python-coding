@@ -1,3 +1,8 @@
+Mutable and immutable datatypes in python:
+********************************************
+Mutable- list,dict,sets
+Immutable - int,float,str,tuples,bool
+
 serialization and deserialization using pickle
 ************************************************
 
