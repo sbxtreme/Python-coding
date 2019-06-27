@@ -3,6 +3,15 @@ Mutable and immutable datatypes in python:
 Mutable- list,dict,sets
 Immutable - int,float,str,tuples,bool
 
+Namespaces in Python:
+**********************
+Like every language python also maintains the namespaces in the form of python dictionaries.
+A namespace is a system to have a unique name for each and every object in Python. An object might be a variable or a method.
+There are 3 types of namespaces:
+1) Inbuit namespaces for inbuild functions like print
+2) Global namespace for global variables 
+3) Local namespace for local variables
+
 serialization and deserialization using pickle
 ************************************************
 
