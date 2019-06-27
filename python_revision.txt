@@ -1413,3 +1413,7 @@ coff = np.array([[1,2],[2,-1]])
 cons = np.array([1,2])
 sol = np.linalg.solve(coff,cons)
 print (sol)
+
+To remove a file in python:
+***************************
+os.remove(filename)
