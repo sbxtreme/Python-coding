@@ -1,3 +1,24 @@
+Shuffle list
+************
+from random import shuffle
+x = ['Keep', 'The', 'Blue', 'Flag', 'Flying', 'High']
+shuffle(x)
+
+Use of dir() in python:
+***********************
+To get the list of dunder as well as user defined methods of class we use dir() function.
+class a:
+	pass
+	def hello(self):
+		pass
+
+dir(a)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'hello']
+
+First class functions in python:
+**********************************
+In Python, functions are first-class objects. This means that they can be assigned to variables, returned from other functions and passed into functions. Classes are also first class objects.
+
 Mutable and immutable datatypes in python:
 ********************************************
 Mutable- list,dict,sets
@@ -74,6 +95,8 @@ in case of python below flow is used:
 python code(.py file or in repl)-->compiled code by compiler-->Byte code-->interpreted by PVM-->machine language
 the reason for converting the code into bytecode is to achieve platform independence i.e we can run code on any machine 
 with any CPU architecture design or structure.
+
+For example, When you run myprog.py source file, the python interpreter first looks to see if any 'myprog.pyc' (which is the byte-code compiled version of 'myprog.py') exists, and if it is more recent than 'myprog.py'. If so, the interpreter runs it. If it does not exist, or 'myprog.py' is more recent than it (meaning you have changed the source file), the interpreter first compiles 'myprog.py' to 'myprog.pyc'.
 
 there are various implementations of python i.e python language when executed and perform tasks it internally executed in other language.
 1)cpython -- executes in c language.
@@ -1417,3 +1440,9 @@ print (sol)
 To remove a file in python:
 ***************************
 os.remove(filename)
+
+To generate random number in python:
+*************************************
+np.random.rand()
+OR
+random.random()
