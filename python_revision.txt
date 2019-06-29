@@ -1,3 +1,41 @@
+Monkey patching:
+****************
+Monkey patching is the term refers to dynamic modifications of a class or module at run-time.
+Below is an example:
+
+There are 2 files
+1) file.py which containts the below code:
+class Monkey:
+    def funcs(self):
+        print('the funcs is from file module')
+
+2) monkey.py which contains the below code:
+import file
+def monkey_patching(self):
+    print('the funcs is called from monkey patching')
+
+print(' Executing function before monkey patching\n','-'*40)
+m=file.Monkey() # creating object of Monkey class present in file module
+m.funcs() # calling method of Monkey class present in file module
+
+file.Monkey.funcs=monkey_patching # done monkey patching
+
+m=file.Monkey()
+print(' \n Executing function after monkey patching\n','-'*40)
+m.funcs()
+
+
+Output:
+-------
+ Executing function before monkey patching
+ ----------------------------------------
+the funcs is from file module
+ 
+ Executing function after monkey patching
+ ----------------------------------------
+the funcs is called from monkey patching
+
+
 *args and **kargs in python:
 *****************************
 1) *args: this accepts multiple arguments in a function/method. args accepts the values as a tuple
