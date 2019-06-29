@@ -1446,3 +1446,68 @@ To generate random number in python:
 np.random.rand()
 OR
 random.random()
+
+
+
+
+
+***************************
+Python developer toolkits:
+***************************
+1)sys.path gives the list of all the directories where python searches the imported module used in a program.
+ex: import request , so rquest module will be searched in the directories listed by sys.path.
+
+2) Pip details:
+pip list # show all the installed packages.
+pip freeze > requirements.txt '''this will add the installed packages details in requirements.txt file 
+								which further can be parsed by pip to install all the packages from this file using the below command.'''
+pip install -r requirements.txt # install all the packages from requirements file.
+pip show <package name> # it will give all the details and dependencies of packages
+
+3) Virtualenv:
+This is a python package which is used to create virtual environment in which we can install packages which we need 
+for out project.This prevents clashing with some others projects in python using different versions of 
+same package and hence does not break any running functionality using different version of same python package.
+
+command to install virtualenv:
+pip install virtualenv
+
+create a directory : mkdir .virtualenvs
+inside this directory create your project in virtualenvs : virtualenv project1
+activate the virtualenv: . project1/bin/activate
+deactivate the virtualenv: deactivate
+
+4) Virtualenvwrapper: This is a wrapper which can be installed using pip install virtualenvwrapper
+Using keyword workon <virtualenv name>we can switch between different virtual envs in a system.
+This command 'workon' automatically deactivates the previous virtual env and activates the new virtualenv which we passed 
+with workon keyword.
+workon <virtualenv1>
+workon <virtualenv2> # switch from virtualenv1 to virtualenv2
+
+5)Pylint: This tool is used to find out the code quality as per Pip-8 conventions.
+Few Pip 8 conventions are:
+Name of classes should be in camel case like StudentDetail
+Name of Variable should be in small letters, use _ in case of large variable name like student_name
+Variable names should be meaningfull like student_name='Shobhit' not like a='Shobhit'
+Name of functions should be in small letters, use _ in case of large variable name like student_data
+Docstring should be used while writing any business logic in methods,functions,classes etc.
+Name of constant variables should be in Caps like CONSTANT_VAL=5
+
+to run pylint we use : pylint <name of module> # this will check all the files present inside module 
+(NOTE: difference between module and directory is that in module there must be __init__.py file where as in directory __init__.py file is not present).
+
+There are many options to disable pylint code , one of the option is to write the below in your .py file
+# pylint: disable=message-name
+
+6) Python debugger(pdb): 
+It is a debugging model in python which can be used like :
+import pdb
+pdb.set_trace()
+
+in a code where we need to debug , we can write the above 2 lines and debugger will start from that line in python.
+The debugger can be used in IDE like pycharm.
+
+7) Python documentation using sphinx:
+This is a python library which is used to generate the Html or pdf documentation using the docstring of python.
+The doc string in python is written just after starting a function,class or method and this creates __doc__() method
+of class for which we are writing documentation.
