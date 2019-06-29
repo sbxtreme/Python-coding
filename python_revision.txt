@@ -35,7 +35,7 @@ output:
 50
 
 
-2) **kargs: 
+2) **kargs: This is used when we want to pass the values in a function with keys without defining the number/name of arguments.
 
 def person(**kargs):
     print(kargs)
