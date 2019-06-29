@@ -1,3 +1,58 @@
+*args and **kargs in python:
+*****************************
+1) *args: this accepts multiple arguments in a function/method. args accepts the values as a tuple
+print(args)
+(1,34,5,6,7,8,8,99,2)
+
+ex1:
+def sum(*args):
+    c=0
+    for i in args:
+        c=c+i
+    print(c)
+    
+    
+sum(1,34,5,6,7,8,8,99,2)
+
+ex2:
+def sum(*args):
+    print(args)
+    sum1=0
+    for i in args:
+        for j in i:
+            sum1=sum1+j
+        print(sum1)
+    
+    
+l=[1,3,4,6,6]
+l1=[6,7,8,9]    
+sum(l1,l)
+
+output:
+*******
+([6, 7, 8, 9], [1, 3, 4, 6, 6])
+30
+50
+
+
+2) **kargs: 
+
+def person(**kargs):
+    print(kargs)
+    for k,v in kargs.items():
+        print(k,':',v)
+
+person(name='shobhit',place='ggn',tech='python',mob='97328688405296')
+
+output:
+-------
+{'name': 'shobhit', 'place': 'ggn', 'tech': 'python', 'mob': '97328688405296'}
+name : shobhit
+place : ggn
+tech : python
+mob : 97328688405296
+
+
 Shuffle list
 ************
 from random import shuffle
