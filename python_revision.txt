@@ -1660,3 +1660,32 @@ Below is the flow of django:
 						|----------------->Models ------> Database	
 user -------> django -------> URLs--------> Views 
 						|----------------->Templetes
+
+
+String functions:
+-----------------
+capitalize() − Capitalizes first letter of string.
+isalnum() − Returns true if string has at least 1 character and all characters are alphanumeric and false otherwise.
+isdigit() − Returns true if string contains only digits and false otherwise.
+islower() − Returns true if string has at least 1 cased character and all cased characters are in lowercase and false otherwise.
+isnumeric() − Returns true if a unicode string contains only numeric characters and false otherwise.
+isspace() − Returns true if string contains only whitespace characters and false otherwise.
+istitle() − Returns true if string is properly "titlecased" and false otherwise.
+isupper() − Returns true if string has at least one cased character and all cased characters are in uppercase and false otherwise.
+lower() − Converts all uppercase letters in string to lowercase.
+max(str) − Returns the max alphabetical character from the string str.
+min(str) − Returns the min alphabetical character from the string str.
+list.insert(index, obj) − Inserts object obj into list at offset index.
+list.remove(<elementname>)
+list.pop() # removes the last element by default
+list.pop(3) # removes element on index 3
+
+a='abca'
+a.replace('a','x',1) # first occurance of a
+a.replace('a','x',2) # second occurance of a
+
+a='Hello'
+a.swapcase()
+'hELLO'
+
+l.reverse() # to reverse the list
