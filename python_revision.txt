@@ -1604,3 +1604,15 @@ The debugger can be used in IDE like pycharm.
 This is a python library which is used to generate the Html or pdf documentation using the docstring of python.
 The doc string in python is written just after starting a function,class or method and this creates __doc__() method
 of class for which we are writing documentation.
+
+Use of repr and eval methods:
+-----------------------------
+a=1
+print (eval(repr(a)))
+print (type(eval(repr(a))))
+1
+<class 'int'>
+
+1) Here an integer object is converted into string object using repr() method
+2) Further eval() converts the str obj into int object and evaluates the value
+
