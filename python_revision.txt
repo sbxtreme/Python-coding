@@ -1623,3 +1623,40 @@ Difference between / and //:
 a,b=1.4,2
 a/b=0.7
 a//b=0.0
+
+Random value from list or tuple:
+---------------------------------
+l=[1,3,4]
+t=(4,6,7)
+import random as r
+print('random value from list:',r.choice(l))
+print('random value from tuple:',r.choice(t))
+
+Shuffle a list:
+---------------
+random.shuffle(l)
+
+
+Basics of django:
+------------------
+Django:
+-------
+1) Django is a web development framework in python.
+2) Django uses it's own ORM ( object relational mapper) using which it interacts with database.
+3) Default database used is sqllite.
+4) Django is based on MVT pattern i.e Model , View and Templete pattern. 
+If a webpage we have 3 important things:
+1) Data 
+2) Layout
+3) Business logic
+
+Model is linked to database .In order to get data from database Model object is used.
+Templetes are html,css,javascript page with DTL (django templete language).
+DTL is used to insert some dynamic data in the templete based. We have place holders in templete 
+which is replaced by data.
+The business logic is written in views which calls model and templete.
+Below is the flow of django:						
+													
+						|----------------->Models ------> Database	
+user -------> django -------> URLs--------> Views 
+						|----------------->Templetes
