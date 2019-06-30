@@ -1616,3 +1616,10 @@ print (type(eval(repr(a))))
 1) Here an integer object is converted into string object using repr() method
 2) Further eval() converts the str obj into int object and evaluates the value
 
+Difference between / and //:
+----------------------------
+/ - gives the actual value of quotient
+// - gives the round off value of quotient
+a,b=1.4,2
+a/b=0.7
+a//b=0.0
